@@ -19,10 +19,10 @@ const getAllArticles = async function(req, res) {
 const createArticle = async function (req, res) {
     try {
         const { token } = req.headers;
-        const { title, author, summary, link } = req.body;
+        const { title, author, summary, link, tags } = req.body;
         const isValid = await jwt.verify(token, 'NotSoSecret', {algorithm: 'HS256'});
         if(isValid) {
-            const newArticle = new Article({ title: title, author: author, summary: summary, link: link });
+            const newArticle = new Article({ title: title, author: author, summary: summary, link: link, tags: tags });
             await newArticle.save();
             res.status(201).send({ message: "Article has been posted successfully!", article: newArticle });
         } else {
@@ -37,10 +37,10 @@ const updateArticle = async function(req, res) {
     try {
         const { token } = req.headers;
         const { id } = req.params;
-        const { title: title, author: author, summary: summary, link: link } = req.body;
+        const { title, author, summary, link, tags } = req.body;
         const isValid = await jwt.verify(token, 'NotSoSecret', {algorithm: 'HS256'});
         if(isValid) {
-            const article = await Article.update({ title: title, author: author, summary: summary, link: link }, {where: {id: id}});
+            const article = await Article.update({ title: title, author: author, summary: summary, link: link, tags: tags }, {where: {id: id}});
             article.save();
             res.status(200).send({ message: "Article has been updated successfully!", article: article });
         } else {
