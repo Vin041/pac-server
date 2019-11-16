@@ -17,5 +17,11 @@ const Article = sequelize.define('article', {
         type: Sequelize.STRING,
         allowNull: false
     },
+    tags: {
+        type: Sequelize.STRING,
+        allowNull: true
+    }
     
 })
+
+module.exports = Article;
