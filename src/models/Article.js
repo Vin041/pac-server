@@ -19,3 +19,5 @@ const Article = sequelize.define('article', {
     },
     
 })
+
+module.exports = Article;
