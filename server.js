@@ -9,6 +9,7 @@ const connection = require('./connection');
 
 // Routes
 const userRoutes = require('./src/routes/User');
+const articleRoutes = require("./src/routes/Article");
 
 // Initiate connection with MongoDB.
 app.use(connection, function(){
@@ -24,6 +25,7 @@ app.use(bodyParser.urlencoded({ extended: true})); // application/x-www-form-url
 
 // Route list
 app.use('/user', userRoutes);
+app.use('/articles', articleRoutes);
 
 app.listen(port, function(req, res){
     connection.sync();
